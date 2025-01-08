@@ -1,5 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:softwarica_student_management_bloc/app/constants/hive_table_constant.dart';
 import 'package:softwarica_student_management_bloc/features/batch/data/model/batch_hive_model.dart';
 import 'package:softwarica_student_management_bloc/features/course/model/course_hive_model.dart';
 
@@ -15,18 +16,39 @@ class HiveService {
   }
 
   // Batch Queries
-  Future<void> addBatch() async {}
+  Future<void> addBatch(BatchHiveModel batch) async {
+    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
+    await box.put(batch.batchId, batch);
+  }
 
-  Future<void> deleteBatch() async {}
+  Future<void> deleteBatch(String id) async {
+    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
+    await box.delete(id);
+  }
 
-  Future<void> getAllBatches() async {}
+  Future<List<BatchHiveModel>> getAllBatches() async {
+    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
+    var batches= box.values.toList();
+    return batches;
+  }
 
 // Course Queries
-  Future<void> addCourse() async {}
+  Future<void> addCourse(CourseHiveModel course) async {
+    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
+    await box.put(course.courseId, course);
 
-  Future<void> deleteCourse() async {}
+  }
 
-  Future<void> getAllCourses() async {}
+  Future<void> deleteCourse(String id) async {
+    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
+    await box.delete(id);
+  }
+
+  Future<List<BatchHiveModel>> getAllCourses() async {
+    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.courseBox);
+    var courses= box.values.toList();
+    return courses;
+  }
 
 // Student Queries
   Future<void> addStudent() async {}

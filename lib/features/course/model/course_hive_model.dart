@@ -1,4 +1,4 @@
-// dart run build runner build -d
+// dart run build_runner build -d
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:softwarica_student_management_bloc/app/constants/hive_table_constant.dart';
